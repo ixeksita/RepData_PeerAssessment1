@@ -1,13 +1,15 @@
 ---
 title: "PA1_template"
-output: html_document
+author: Tania A.
+output: html_document:
+          keep_md: TRUE
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.width=10, fig.height=8, fig.path='Figures/',
+knitr::opts_chunk$set(fig.width=10, fig.height=8, fig.path='figures/', dev=c('png'),
                       echo=FALSE, warning=FALSE, message=FALSE, echo=TRUE)
 ```
-Author: Tania Sanchez Monroy
+
 ```{r include = FALSE}
 #loading all the libraries needed
 library(ggplot2)
@@ -21,7 +23,7 @@ library(tidyr)
 The first step is to load the data. This was obtained from [the course website](https://www.coursera.org/learn/reproducible-research/peer/gYyPt/course-project-1)
 ```{r echo = TRUE}
 # loading the data 
-activity <- read.csv(unz("repdat-data-activity.zip", "activity.csv"), header=T, quote="\"", sep=",")
+activity <- read.csv("activity.csv", header=T, quote="\"", sep=",")
 ```
 Dropping NA's and ensuring the dates are datetime class
  
@@ -52,19 +54,16 @@ p + geom_bar(width = 1.0, stat ='identity', colour='#68228B', fill='#E6E6FA') +
   ggtitle("Total number of steps taken each day") +
   theme(plot.title = element_text(hjust =0.5))
 ```
-The total number of steps per day are:
-```{r echo = TRUE, results='asis'}
-kable(steps_day[,], caption ='Total steps per date')
-```
+
 
 3. Now we need to calculate the mean and median number of steps per day
 
 ```{r echo = TRUE}
 #computing the mean steps per day 
-mean(steps_day$total_steps)
+as.integer(mean(steps_day$total_steps))
 median(steps_day$total_steps)
 ```
-The mean is *107766* and the median *10765*
+The mean is *10766* and the median *10765*
 
 # What is the average daily activity pattern?
 1. Time series plot of the 5 minute interval (x) and the average number of steps taken averaged across all days (y)
@@ -90,7 +89,7 @@ mean_steps_i[which.max(mean_steps_i$mean_steps),]
 ```
 
 ## Imputing missing values
-Note that there are a number of days/intervals where there are missing values (coded as 𝙽𝙰). The presence of missing days may introduce bias into some calculations or summaries of the data.
+Note that there are a number of days/intervals where there are missing values (coded as ????????). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
 1. Calculating the number of NA's
 ```{r echo = TRUE}
